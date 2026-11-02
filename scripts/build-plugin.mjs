@@ -17,11 +17,11 @@ process.stdout.write(run(['run', 'build']));
 const stage = resolve(root, 'artifacts/package-stage');
 rmSync(stage, { recursive: true, force: true }); mkdirSync(stage, { recursive: true });
 try {
-  for (const path of ['server', 'plugin', 'dist', 'scripts/prepare-pty.mjs', 'scripts/terminal-turn-notify.mjs']) cpSync(resolve(root, path), resolve(stage, path), { recursive: true });
+  for (const path of ['server', 'plugin', 'dist', 'docs', 'scripts/prepare-pty.mjs', 'scripts/terminal-turn-notify.mjs']) cpSync(resolve(root, path), resolve(stage, path), { recursive: true });
   cpSync(resolve(root, 'docs/plugin-install.md'), resolve(stage, 'README.md'));
   const source = JSON.parse(readFileSync(resolve(root, 'package.json')));
   const dependencies = Object.fromEntries(['express', 'ws', 'zod', 'node-pty', '@larksuiteoapi/node-sdk'].map(name => [name, source.dependencies[name]]));
-  const manifest = { name: source.name, version: source.version, description: '调研工作台：适用于 DeepSeek Harness 桌面版和网页版的 宿主原生会话调研插件', type: 'module', main: source.main, engines: source.engines, exports: source.exports, dsh: source.dsh, dependencies, bundledDependencies: Object.keys(dependencies), files: ['plugin', 'server', 'dist', 'scripts', 'README.md'] };
+  const manifest = { name: source.name, version: source.version, description: '调研工作台：适用于 DeepSeek Harness 桌面版和网页版的 宿主原生会话调研插件', type: 'module', main: source.main, engines: source.engines, exports: source.exports, dsh: source.dsh, dependencies, bundledDependencies: Object.keys(dependencies), files: ['plugin', 'server', 'dist', 'scripts', 'docs', 'README.md'] };
   writeFileSync(resolve(stage, 'package.json'), JSON.stringify(manifest, null, 2));
   // Copy the complete production dependency tree, including nested versions.
   function copyDependency(name, parentRoot, parentTarget = stage) {

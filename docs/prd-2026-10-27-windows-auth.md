@@ -12,7 +12,6 @@
 
 ## Windows/macOS 实现
 
-- server/codex-launch.mjs：macOS 保留原启动方式；Windows 从 PATH 或 npm 默认目录解析原生 codex.exe，包括 x64/arm64 的官方 optional-package vendor 布局与旧布局。拒绝把批处理脚本交给 ConPTY，不使用 shell 拼接用户参数，支持含空格、中文和 & 的路径。
 - scripts/prepare-pty.mjs：Windows 准备架构匹配的 ConPTY DLL/OpenConsole 文件；macOS 修复 spawn-helper 可执行位。无安装时构建脚本。
 - 打包依赖树改为提升共享依赖，版本冲突时才嵌套；从此前最长 343 字符的包内路径降低至不超过 180 字符，降低 Windows 解压风险。建议解压到较短目录，例如 C:\dsh-plugins。
 - scripts/desktop-archive.mjs 使用 fflate 生成/解压 ZIP，不依赖 zip/unzip/tar 外部命令；保留 macOS helper 执行位。
@@ -35,5 +34,3 @@ node scripts/release-acceptance.mjs --desktop-runtime "/Applications/DeepSeek Ha
 ```
 
 Windows 验收机可先运行完整仓库验收和 release-acceptance；桌面安装后也可用桌面附带的 Electron Node 运行时执行 scripts/plugin-acceptance.mjs --profile desktop，验证桌面实际安装目录与原生 PTY。
-
-技术依据：[node-pty 官方项目](https://github.com/microsoft/node-pty)、[Codex 官方 npm 启动器](https://github.com/openai/codex/blob/main/codex-cli/bin/codex.js)；并核对当前 node-pty 1.1.0 的 DLL 准备、native-module 搜索及 Codex vendor 路径。飞书 split-flow 使用本机 CLI auth login/qrcode 帮助及其共享身份/权限说明。
