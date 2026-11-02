@@ -11,7 +11,7 @@ const rootIndex = process.argv.indexOf('--package-root');
 const packageRoot = rootIndex >= 0 ? resolve(process.argv[rootIndex + 1]) : resolve(process.env.DSH_HOME ?? resolve(homedir(), '.dsh'), 'profiles', profile, 'node_modules/dsh-research-workbench');
 const requireInstalled = createRequire(resolve(packageRoot, 'package.json'));
 const manifest = requireInstalled('./package.json');
-assert.equal(manifest.scripts, undefined, '发布包不应执行安装脚本');
+for (const hook of ['preinstall', 'install', 'postinstall', 'prepare', 'prepack', 'postpack', 'prepublish', 'publish']) assert.ok(!manifest.scripts?.[hook], `插件不应执行安装生命周期脚本：${hook}`);
 assert.ok(manifest.dsh?.bundle?.patch); assert.ok(manifest.dsh?.client);
 const { connectRuntime } = await import(pathToFileURL(resolve(packageRoot, 'plugin/index.mjs')));
 const dataDir = mkdtempSync(resolve(tmpdir(), 'installed-dsh-research-'));

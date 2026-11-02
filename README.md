@@ -4,7 +4,7 @@
 
 根据 [飞书 PRD](https://zcnnosk3k1j9.feishu.cn/wiki/Twspww4ZKiUQI8krBGlc2VCsnmr) 实现的本地单用户 DSH 插件。以调研任务与报告为入口，复用宿主原生会话执行调研、追问与飞书保存。
 
-**当前 PRD 修订 2036：扫码登录飞书账号，再选择已有应用或创建新应用。** 应用凭据自动保存到独立 CLI 配置，继续同账号个人文档授权；换账号重新扫码绑定对应应用。详见 [实现与验收](docs/prd-2026-11-02-qr-application.md)。安装包版本 0.18.1，[安装说明](docs/plugin-install.md)。
+**当前 PRD 修订 2036：扫码登录飞书账号，再选择已有应用或创建新应用。** 应用凭据自动保存到独立 CLI 配置，继续同账号个人文档授权；换账号重新扫码绑定对应应用。详见 [实现与验收](docs/prd-2026-11-02-qr-application.md)。安装包版本 0.18.2，[安装说明](docs/plugin-install.md)。
 
 工作台已封装为可安装的 dsh 插件。 执行 `npm run plugin:install`，按输出命令启动 dsh 后点击侧栏“调研工作台”。[插件安装、架构与验收](docs/prd-2026-10-27-dsh-plugin.md)。
 
