@@ -1,3 +1,7 @@
+# 0.18.1 中文显示名
+
+界面页签和主页显示「调研工作台」，项目和插件包名保留 dsh-research-workbench。113 项 Node、26 项浏览器、真实宿主及离线包验收通过。
+
 # 0.18.0 名称统一
 
 项目与插件名统一为 dsh-research-workbench。113 项 Node、26 项浏览器用例及新名称下的真实宿主验收通过；参见 [升级说明](rename-2026-11-02-dsh-research-workbench.md)。

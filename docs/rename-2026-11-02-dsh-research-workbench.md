@@ -1,5 +1,7 @@
 # 0.18.0：统一名称为 dsh-research-workbench
 
+0.18.1 显示名修正：项目、仓库、插件包名和模块 ID 继续使用 dsh-research-workbench；界面页签、主页、面包屑和浏览器标题显示「调研工作台」。下文 0.18.0 的页面名称变更属于历史记录，以此修正为准。
+
 GitHub 项目、npm 插件包名、DSH bundle/module ID、侧栏入口、页面标题、页面名称与安装包前缀统一为 dsh-research-workbench。
 
 仓库：https://github.com/zaki-zeyi/dsh-research-workbench

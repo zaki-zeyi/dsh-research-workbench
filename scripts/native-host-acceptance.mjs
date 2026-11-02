@@ -74,7 +74,7 @@ try {
     let blockStartup = true; await page.route('**/research-workbench/status', route => blockStartup ? new Promise(() => {}) : route.continue());
     await page.goto(launchURL);
     const preview = page.getByRole('button', { name: 'Continue', exact: true }); try { await preview.waitFor({ state: 'visible', timeout: 5000 }); await preview.click(); } catch {}
-    await page.getByRole('button', { name: 'dsh-research-workbench', exact: true }).click({ timeout: 25000 });
+    await page.getByRole('button', { name: '调研工作台', exact: true }).click({ timeout: 25000 });
     await page.getByRole('alert').filter({ hasText: '连接宿主超时' }).waitFor({ timeout: 12000 }); blockStartup = false; await page.getByRole('button', { name: '重新连接工作台', exact: true }).click();
     const workbench = page.frameLocator('iframe[title="调研工作台"]');
     const card = workbench.locator('.research-card').filter({ hasText: '真实宿主原生会话验收' });

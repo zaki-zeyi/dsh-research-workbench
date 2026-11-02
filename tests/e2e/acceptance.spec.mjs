@@ -35,7 +35,7 @@ test('AC-UI-04 创建校验、默认 Prompt、搜索与移动端布局',async({p
   await page.getByLabel('数据来源').selectOption('custom');await expect(page.getByRole('button',{name:'启动调研'})).toBeDisabled();await page.getByLabel('指定数据来源').fill('https://example.com');await expect(page.getByLabel('任务 Prompt')).toHaveValue(/https:\/\/example.com/);
   await page.keyboard.press('Escape');await expect(page.getByRole('dialog')).not.toBeVisible();
   await page.getByLabel('搜索调研').fill('不存在的主题-xyz');await expect(page.getByText('没有匹配的调研')).toBeVisible();await page.getByLabel('搜索调研').clear();
-  await page.setViewportSize({width:390,height:844});await expect(page.getByRole('heading',{name:'dsh-research-workbench.'})).toBeVisible();expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
+  await page.setViewportSize({width:390,height:844});await expect(page.getByRole('heading',{name:'调研工作台.'})).toBeVisible();expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
   await page.screenshot({path:'test-results/workbench-mobile.png',fullPage:true});
 });
 test('AC-UI-05 Codex 命令行实时展示、命令输出合并与刷新回放', async ({page, request}) => {
@@ -123,7 +123,7 @@ test('AC-UI-08 上传失败可单独重试，报告不变且不增加调研次�
 
 test('AC-UI-09 dsh 嵌入模式保留调研入口且不出现重复侧栏', async ({ page }) => {
   await page.goto('/?embed=dsh');
-  await expect(page.getByRole('heading', { name: 'dsh-research-workbench.' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: '调研工作台.' })).toBeVisible();
   await expect(page.locator('.sidebar')).toBeHidden();
   await page.getByRole('button', { name: '新建调研', exact: true }).click();
   await expect(page.getByRole('dialog')).toBeVisible();

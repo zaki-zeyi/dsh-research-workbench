@@ -1,4 +1,6 @@
-# dsh-research-workbench 0.18.0
+# dsh-research-workbench 0.18.1
+
+插件包名为 `dsh-research-workbench`，DSH 界面页签和主页显示「调研工作台」。
 
 当前扫码流程：点击“扫码登录并选择应用”，在飞书页面先登录目标账号，再选择已有应用或创建新应用。工作台自动保存应用配置，并继续同账号的个人文档授权。已绑定用户点击“重新绑定 / 更换应用”执行相同流程。详见 [PRD 2036 实现与验收](prd-2026-11-02-qr-application.md)。下文旧版本交互记录仅供历史参考。
 
@@ -10,12 +12,12 @@
 
 推荐使用 PRD 指定的“添加插件”弹窗：
 
-1. 下载 `dsh-research-workbench-0.18.0-desktop.zip`，解压到准备长期保留的位置。
+1. 下载 `dsh-research-workbench-0.18.1-desktop.zip`，解压到准备长期保留的位置。
 2. 打开 DeepSeek Harness，进入“插件”，点击“添加插件”。
-3. 在“输入插件的包名、GitHub 仓库地址或本地目录路径”中，填写解压后 **dsh-research-workbench-0.18.0 文件夹的绝对路径**。该文件夹下直接有 package.json、plugin、server、dist、node_modules。
+3. 在“输入插件的包名、GitHub 仓库地址或本地目录路径”中，填写解压后 **dsh-research-workbench-0.18.1 文件夹的绝对路径**。该文件夹下直接有 package.json、plugin、server、dist、node_modules。
 4. 点击“安装”，完成后按界面提示启用或重启，在侧栏点击“调研工作台”。
 
-Windows 示例安装目录：`C:\dsh-plugins\dsh-research-workbench-0.18.0`；macOS 使用解压目录的完整路径。建议选择较短且准备长期保留的位置。两端使用同一个 ZIP，不需要 WSL 或外部 unzip 命令。
+Windows 示例安装目录：`C:\dsh-plugins\dsh-research-workbench-0.18.1`；macOS 使用解压目录的完整路径。建议选择较短且准备长期保留的位置。两端使用同一个 ZIP，不需要 WSL 或外部 unzip 命令。
 
 本机打包会生成 `artifacts/desktop-install-path.txt`，其中的整行路径可直接粘贴。不要填写 ZIP 文件、开发仓库目录或仅填写包名：目前未发布 npm，包名不能从 npm 搜索安装。
 
@@ -24,7 +26,7 @@ Windows 示例安装目录：`C:\dsh-plugins\dsh-research-workbench-0.18.0`；ma
 macOS 也可先完全退出桌面应用，再用它自带的 CLI 安装 tgz：
 
 ```bash
-"/Applications/DeepSeek Harness.app/Contents/Resources/runtime/cli/bin/dsh" plugin --profile desktop add "/绝对路径/dsh-research-workbench-0.18.0.tgz"
+"/Applications/DeepSeek Harness.app/Contents/Resources/runtime/cli/bin/dsh" plugin --profile desktop add "/绝对路径/dsh-research-workbench-0.18.1.tgz"
 ```
 
 桌面应用运行期间使用内置插件页面安装；不要用全局 npm dsh 修改 desktop profile。
@@ -32,7 +34,7 @@ macOS 也可先完全退出桌面应用，再用它自带的 CLI 安装 tgz：
 ## 网页版安装
 
 ```bash
-dsh plugin --profile web add "/绝对路径/dsh-research-workbench-0.18.0.tgz"
+dsh plugin --profile web add "/绝对路径/dsh-research-workbench-0.18.1.tgz"
 dsh web
 ```
 
@@ -91,7 +93,7 @@ npm run accept:update -- --profile desktop --host-smoke
 
 该命令先运行完整自动验收，再验证真实隔离宿主和浏览器，成功后打包并安装到指定 profile；失败时停止，不安装。网页 profile 可指定 `--profile research-workbench`。Windows 桌面请使用添加插件弹窗安装生成的 ZIP 解压目录；本轮真实宿主验证在 macOS 完成。
 
-## 0.18.0 文件夹链接与目录 ID
+## 0.18.1 文件夹链接与目录 ID
 
 “设置飞书根目录”可以粘贴 `https://企业.feishu.cn/drive/folder/…` 文件夹链接，系统保存目录 ID，Agent 直接上传；不要求或申请目录列表读取、文档搜索权限。不填链接时首次新建默认“调研工作台”目录并记住 ID，后续复用。因为不读取目录列表，已有同名文件夹需要提供链接；创建结果不确定时提示核对，不重复建目录。
 
@@ -109,10 +111,10 @@ npm run accept:update -- --profile desktop --host-smoke
 
 “绑定飞书 / 已绑定飞书”→“配置自己的飞书应用”，填写 App ID、App Secret 后保存并扫码授权。使用独立 Lark CLI profile，不覆盖本机默认应用；Secret 不回显，同一 App ID 可留空保留已存凭据。可以切回本机默认应用。应用必须允许目标账号使用，目标文件夹也需对该账号可访问。失败任务重试可使用当前新应用恢复交付，原会话和历史执行配置保留。
 
-## 0.18.0 扫码绑定账号与应用
+## 0.18.1 扫码绑定账号与应用
 
 点击“绑定飞书”会展示所选应用并自动生成账号授权二维码；扫描后点击“我已授权”完成核验。已绑定用户可点“重新绑定”更换账号；切换企业时先点“更换应用”，保存已有应用配置后自动生成新二维码。报告仍以个人身份上传，不自动创建应用，不申请目录列表或搜索权限。应用需要对扫码账号可用，目标文件夹需要该账号具备编辑权限。
 
-## 0.18.0 换账号提示无应用使用权限
+## 0.18.1 换账号提示无应用使用权限
 
 “重新绑定”先选择“继续使用当前应用扫码”或“换企业或应用”。二维码只更换账号授权，应用保持为上方展示的应用；不会自动切到新账号名下的应用。同企业账号请管理员加入应用可用范围；不同企业请先选该账号可用的应用。二维码旁提供“当前应用无法使用，换一个应用”入口；取消配置保留原账号。

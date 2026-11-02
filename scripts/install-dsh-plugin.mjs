@@ -27,7 +27,7 @@ run(cli, ['plugin', '--profile', profile, 'add', profile === 'desktop' ? resolve
 const profileFile = resolve(process.env.DSH_HOME ?? resolve(homedir(), '.dsh'), 'profiles', profile, 'package.json');
 const installedProfile = JSON.parse(readFileSync(profileFile, 'utf8'));
 if (installedProfile.dependencies?.['research-workbench']) run(cli, ['plugin', '--profile', profile, 'remove', 'research-workbench']);
-if (profile === 'desktop') { console.log('安装完成。桌面版已更新到新插件目录；若宿主未自动重载，请重新打开 DeepSeek Harness。点击侧栏“dsh-research-workbench”，新任务使用宿主原生会话。'); process.exit(0); }
+if (profile === 'desktop') { console.log('安装完成。桌面版已更新到新插件目录；若宿主未自动重载，请重新打开 DeepSeek Harness。点击侧栏“调研工作台”，新任务使用宿主原生会话。'); process.exit(0); }
 // Keep local paths and model selection outside the distributable package. Never copy credentials.
 const localEnv = (existsSync(resolve(root, '.env')) ? readFileSync(resolve(root, '.env'), 'utf8') : '').match(/^CODEX_MODEL=(.*)$/m)?.[1]?.trim();
 const patch = resolve(root, 'artifacts', `dsh-${profile}.yml`);
