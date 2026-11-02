@@ -21,3 +21,5 @@ codex/install 是正式安装分支，内容与已验收的 tgz/ZIP 发布包相
 新增 test:git-install 脚本，用 DSH 实际内置 pnpm.mjs，在全新目录和空 store 中安装 Git 依赖，再用 Node 和 Electron 验证页面、依赖、运行时、权限边界与原生 PTY。支持 --source 指定本地安装分支 Git URL。
 
 已验证本地分发 Git 版本冷安装通过：仅安装 1 个自包含插件包，无构建脚本授权。新增 2 项源码安装契约回归，总计 115 项 Node 用例。
+
+远程安装分支已发布；通过完整 GitHub 分支链接在全新 store 中实际安装成功，Node/Electron 验收均通过。桌面 profile 也已用同一链接安装至 0.18.2，保留 17 条历史记录且飞书绑定有效。网页版同步遇到 GitHub 443 连接超时，改用相同版本的已验收本地 tgz 更新；该网络问题与此前的构建脚本限制不同。
