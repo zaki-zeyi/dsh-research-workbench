@@ -39,3 +39,5 @@
 .binding-rebind-choice strong { font-size:13px; }
 .binding-rebind-choice p { font-size:12px; line-height:1.65; color:#647361; }
 .binding-rebind-choice > div { display:flex; gap:8px; flex-wrap:wrap; }
+
+.page-heading h1 { overflow-wrap: anywhere; }

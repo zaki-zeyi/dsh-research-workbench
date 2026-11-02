@@ -1,5 +1,5 @@
 window.__ModuleLoader__.load({
-  id: 'research-workbench',
+  id: 'dsh-research-workbench',
   factory: (require) => {
     const React = require('react'), h = React.createElement;
     let hostContext, lastTask = '';
@@ -83,7 +83,7 @@ window.__ModuleLoader__.load({
       return h('div', { style: { display: 'flex', flexDirection: 'column', width: '100%', height: '100%', minHeight: 0, overflow: 'hidden' } },
         h('iframe', { title: '调研工作台', ref: frame, src: frameSource.current, style: { width: '100%', height: '100%', minHeight: 400, border: 0, display: conversation ? 'none' : 'block', flex: 1 }, allow: 'clipboard-write' }),
         conversation && h('section', { className: 'rw-workspace', 'aria-label': '调研工作台原生对话', style: { height: '100%', minHeight: 0, display: 'flex', flexDirection: 'column', overflow: 'auto' } },
-          h('header', { className: 'rw-topbar' }, h('div', { className: 'rw-breadcrumb' }, '工作空间', h('span', null, '/'), h('strong', null, '调研工作台'), h('span', null, '/'), h('span', null, '调研详情')), h('span', { className: 'rw-host-label' }, 'DSH 原生会话')),
+          h('header', { className: 'rw-topbar' }, h('div', { className: 'rw-breadcrumb' }, '工作空间', h('span', null, '/'), h('strong', null, 'dsh-research-workbench'), h('span', null, '/'), h('span', null, '调研详情')), h('span', { className: 'rw-host-label' }, 'DSH 原生会话')),
           h('div', { className: 'rw-detail', style: { flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column' } },
             h('header', null,
               h('button', { className: 'rw-back', onClick: () => showWorkbench('') }, h('span', { 'aria-hidden': true }, '←'), '返回'),
@@ -99,9 +99,9 @@ window.__ModuleLoader__.load({
       inject: ['slots', 'layout', 'sessions', 'uiSession'],
       apply(ctx) {
         hostContext = ctx;
-        ctx.slots.inject('main', () => ctx.slots.register({ name: 'main', key: 'research-workbench', children: { 'research-workbench.session': { kind: 'single', scope: 'session' } } }, Panel));
+        ctx.slots.inject('main', () => ctx.slots.register({ name: 'main', key: 'dsh-research-workbench', children: { 'research-workbench.session': { kind: 'single', scope: 'session' } } }, Panel));
         ctx.slots.inject('research-workbench.session', () => ctx.slots.register({ name: 'research-workbench.session' }, ({ renderFactorySlot }) => renderFactorySlot('conversation.content', { variant: 'embedded', phase: 'active', hero: false })));
-        ctx.slots.inject('sidebar.panellist', () => ctx.slots.register({ name: 'sidebar.panellist', id: 'research-workbench', label: '调研工作台', order: 50 }, ({ size = 20 }) => h('span', { style: { fontSize: size }, 'aria-hidden': true }, '▤')));
+        ctx.slots.inject('sidebar.panellist', () => ctx.slots.register({ name: 'sidebar.panellist', id: 'dsh-research-workbench', label: 'dsh-research-workbench', order: 50 }, ({ size = 20 }) => h('span', { style: { fontSize: size }, 'aria-hidden': true }, '▤')));
       },
     };
   },

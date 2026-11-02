@@ -48,7 +48,7 @@ test('Windows npm 命令使用 Node + npm-cli.js，避免 .cmd 与 shell', () =>
 });
 test('桌面 ZIP 无外部命令依赖，支持含中文与空格的安装目录', t => {
   const root = fixture(t), source = resolve(root, '插件 & 空格'); mkdirSync(resolve(source, 'plugin'), { recursive: true });
-  writeFileSync(resolve(source, 'package.json'), '{"name":"research-workbench"}'); writeFileSync(resolve(source, 'plugin/入口.js'), '完整内容');
+  writeFileSync(resolve(source, 'package.json'), '{"name":"dsh-research-workbench"}'); writeFileSync(resolve(source, 'plugin/入口.js'), '完整内容');
   const zip = resolve(root, 'desktop.zip'); createDesktopZip(source, zip); extractDesktopZip(zip, resolve(root, '解压目录'));
   assert.equal(readFileSync(resolve(root, '解压目录/插件 & 空格/plugin/入口.js'), 'utf8'), '完整内容');
 });

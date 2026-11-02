@@ -1,3 +1,7 @@
+# 0.18.0 名称统一
+
+项目与插件名统一为 dsh-research-workbench。113 项 Node、26 项浏览器用例及新名称下的真实宿主验收通过；参见 [升级说明](rename-2026-11-02-dsh-research-workbench.md)。
+
 # 0.17.1 工作台启动恢复
 
 113 项 Node 回归，26 项浏览器交互，真实 DSH 宿主新增启动超时后重试恢复验证。详见 [修复说明](fix-2026-11-02-workbench-startup.md)。

@@ -43,7 +43,7 @@ test('插件卸载注销路由并关闭自身服务，初始化期间卸载也�
 test('浏览器插件使用真实 dsh 模块协议，侧栏入口与主面板 key 对应', () => {
   let loaded;
   runInNewContext(readFileSync(new URL('../plugin/client.js', import.meta.url), 'utf8'), { window: { __ModuleLoader__: { load(value) { loaded = value; } } } });
-  assert.equal(loaded.id, 'research-workbench');
+  assert.equal(loaded.id, 'dsh-research-workbench');
   const client = loaded.factory(() => ({ createElement() {} }));
   const rows = []; client.apply({ slots: { inject(_name, fn) { fn(); }, register(options, component) { rows.push({ options, component }); } } });
   assert.equal(rows.find(r => r.options.name === 'main').options.key, rows.find(r => r.options.name === 'sidebar.panellist').options.id);

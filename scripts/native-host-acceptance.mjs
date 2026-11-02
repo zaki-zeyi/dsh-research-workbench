@@ -8,8 +8,8 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 const root = fileURLToPath(new URL('..', import.meta.url)), dir = mkdtempSync(resolve(tmpdir(), 'native-host-')), profile = resolve(dir, 'profiles/native-test');
-mkdirSync(resolve(profile, 'node_modules'), { recursive: true }); symlinkSync(root, resolve(profile, 'node_modules/research-workbench'), 'junction');
-writeFileSync(resolve(profile, 'package.json'), JSON.stringify({ name: 'native-host-test', private: true, dependencies: { 'research-workbench': `link:${root}` }, dsh: { profile: { bundles: ['@deepseek-ai/dsh-base', '@deepseek-ai/dsh-web-app', 'research-workbench'] } } }));
+mkdirSync(resolve(profile, 'node_modules'), { recursive: true }); symlinkSync(root, resolve(profile, 'node_modules/dsh-research-workbench'), 'junction');
+writeFileSync(resolve(profile, 'package.json'), JSON.stringify({ name: 'native-host-test', private: true, dependencies: { 'dsh-research-workbench': `link:${root}` }, dsh: { profile: { bundles: ['@deepseek-ai/dsh-base', '@deepseek-ai/dsh-web-app', 'dsh-research-workbench'] } } }));
 const report = { title: '真实宿主原生会话验收报告', summary: '本报告由隔离的真实 DSH 宿主与本机模拟模型接口协作生成。', markdown: '本验收通过真实宿主的 Session Controller 创建会话、设定完整权限、提交任务并接收原生轮次事件。报告文件由本机模型测试夹具交付，验证工作台正确读取结构化结果并保留会话绑定。[S1]', sources: [{ id: 'S1', title: '本机模拟证据', url: 'https://example.com/native-host', excerpt: '本来源为验收夹具，用于验证本机真实宿主的会话与报告协议。' }] };
 let modelCalls = 0, browser, page, followUpObserved = false;
 const fakeLark = resolve(dir, 'fake-lark');
@@ -48,7 +48,7 @@ const model = createServer(async (req, res) => {
 }); await new Promise(r => model.listen(0, '127.0.0.1', r));
 const probe = createServer(); await new Promise(r => probe.listen(0, '127.0.0.1', r)); const port = probe.address().port; await new Promise(r => probe.close(r));
 writeFileSync(resolve(dir, 'test-patch.json'), JSON.stringify([
-  { id: 'research-workbench', config: { dataDir: resolve(dir, 'workbench') } },
+  { id: 'dsh-research-workbench', config: { dataDir: resolve(dir, 'workbench') } },
   { id: 'agent-preset-registry', config: { default: 'cordis' } },
   { id: 'agent-default-model', config: { provider: 'deepseek-official', model: 'deepseek-flash' } },
   { id: 'llm-deepseek-account', disabled: true },
@@ -74,7 +74,7 @@ try {
     let blockStartup = true; await page.route('**/research-workbench/status', route => blockStartup ? new Promise(() => {}) : route.continue());
     await page.goto(launchURL);
     const preview = page.getByRole('button', { name: 'Continue', exact: true }); try { await preview.waitFor({ state: 'visible', timeout: 5000 }); await preview.click(); } catch {}
-    await page.getByText('调研工作台', { exact: true }).click({ timeout: 25000 });
+    await page.getByRole('button', { name: 'dsh-research-workbench', exact: true }).click({ timeout: 25000 });
     await page.getByRole('alert').filter({ hasText: '连接宿主超时' }).waitFor({ timeout: 12000 }); blockStartup = false; await page.getByRole('button', { name: '重新连接工作台', exact: true }).click();
     const workbench = page.frameLocator('iframe[title="调研工作台"]');
     const card = workbench.locator('.research-card').filter({ hasText: '真实宿主原生会话验收' });

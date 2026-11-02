@@ -19,7 +19,7 @@ function run(command, args, env = process.env) {
 try {
   // The temp installation is outside the repository, so missing dependencies cannot fall back to the development node_modules.
   run('npm', ['install', '--prefix', temp, '--offline', '--ignore-scripts', '--no-audit', '--no-fund', resolve(root, 'artifacts', manifest.filename)]);
-  const args = [resolve(root, 'scripts/plugin-acceptance.mjs'), '--package-root', resolve(temp, 'node_modules/research-workbench')];
+  const args = [resolve(root, 'scripts/plugin-acceptance.mjs'), '--package-root', resolve(temp, 'node_modules/dsh-research-workbench')];
   run(process.execPath, args);
   const i = process.argv.indexOf('--desktop-runtime');
   if (i >= 0) run(resolve(process.argv[i + 1]), ['--expose-internals', ...args], { ...process.env, ELECTRON_RUN_AS_NODE: '1' });

@@ -8,7 +8,7 @@ const i = process.argv.indexOf('--profile');
 const profile = i < 0 ? 'research-workbench' : process.argv[i + 1];
 if (!/^[a-zA-Z0-9_-]+$/.test(profile ?? '')) throw new Error('profile 无效');
 const rootIndex = process.argv.indexOf('--package-root');
-const packageRoot = rootIndex >= 0 ? resolve(process.argv[rootIndex + 1]) : resolve(process.env.DSH_HOME ?? resolve(homedir(), '.dsh'), 'profiles', profile, 'node_modules/research-workbench');
+const packageRoot = rootIndex >= 0 ? resolve(process.argv[rootIndex + 1]) : resolve(process.env.DSH_HOME ?? resolve(homedir(), '.dsh'), 'profiles', profile, 'node_modules/dsh-research-workbench');
 const requireInstalled = createRequire(resolve(packageRoot, 'package.json'));
 const manifest = requireInstalled('./package.json');
 assert.equal(manifest.scripts, undefined, '发布包不应执行安装脚本');
@@ -35,5 +35,5 @@ try {
     proc.onData(data => { output += data; });
     proc.onExit(() => { clearTimeout(timer); try { assert.match(output, /PLUGIN_PTY_OK/); done(); } catch (e) { reject(e); } });
   });
-  console.log(`PASS: 已安装 research-workbench ${manifest.version}；页面、服务复用、权限、来源限制、原生 PTY 均通过`);
+  console.log(`PASS: 已安装 dsh-research-workbench ${manifest.version}；页面、服务复用、权限、来源限制、原生 PTY 均通过`);
 } finally { await runtime?.close(); rmSync(dataDir, { recursive: true, force: true }); }

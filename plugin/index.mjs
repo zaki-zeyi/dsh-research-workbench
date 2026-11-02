@@ -2,7 +2,8 @@ import { resolve } from 'node:path';
 import { readFileSync } from 'node:fs';
 import { homedir } from 'node:os';
 import { startRuntime, dataIdentity } from '../server/runtime.mjs';
-export const name = 'research-workbench';
+export const name = 'dsh-research-workbench';
+// Retain the existing storage namespace and health protocol for upgrades.
 export const inject = ['webServer', 'sessionController', 'permissionPresets'];
 export async function connectRuntime(config = {}, host) {
   const dataDir = resolve(config.dataDir ?? resolve(process.env.DSH_HOME ?? resolve(homedir(), '.dsh'), 'research-workbench'));

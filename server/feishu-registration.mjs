@@ -29,7 +29,7 @@ export class FeishuRegistration {
   async execute(f) {
     let qrWork;
     try {
-      const result = await this.registerApp({ source: 'research-workbench', signal: f.controller.signal,
+      const result = await this.registerApp({ source: 'dsh-research-workbench', signal: f.controller.signal,
         appPreset: { name: '{user}的调研工作台', desc: '调研报告创建与保存' },
         // Include only the business scopes needed by the existing personal delivery flow.
         addons: { preset: false, scopes: { user: this.binding.scopes.filter(s => s !== 'offline_access') } },
