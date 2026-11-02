@@ -1,3 +1,11 @@
+# 仓库直链安装更新
+
+现已将 GitHub 默认分支切换为 `release`，DSH 直接填写 `https://github.com/zaki-zeyi/dsh-research-workbench` 即可安装，无需分支后缀或本机 Codex。开发源码仍保留于 `main`。
+
+已用无后缀仓库链接、全新 pnpm store 和 DSH 内置 pnpm 11.28.5 完成安装；Node 与桌面 Electron 运行时验收均通过。未增加 allowBuilds，也未降低宿主构建策略。仓库为私有，仍需要 GitHub 读取权限。
+
+以下为此前故障处理记录；其中分支后缀方案已被上述直链方案替代。
+
 # 0.18.2 GitHub 链接安装
 
 原始仓库链接指向 main 开发源码。根包的 prepack 加上未声明 main，使 DSH 内置 pnpm 尝试准备 Git 依赖，触发 ERR_PNPM_GIT_DEP_PREPARE_NOT_ALLOWED。只修入口仍不够：冷缓存下 node-pty 与 protobufjs 的安装脚本会触发 ERR_PNPM_IGNORED_BUILDS。

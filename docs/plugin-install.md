@@ -124,9 +124,9 @@ npm run accept:update -- --profile desktop --host-smoke
 在 DSH 的“添加插件”中输入：
 
 ```
-https://github.com/zaki-zeyi/dsh-research-workbench#codex/install
+https://github.com/zaki-zeyi/dsh-research-workbench
 ```
 
-仓库保留为私有，安装环境必须具有该仓库的 GitHub 读取权限。请使用 codex/install 安装分支：其中包含预构建页面及运行依赖，不执行 prepare / prepack 或依赖安装脚本，也不需要放宽 allowBuilds。main 是开发源码，不作为严格宿主环境的直接安装入口。离线 tgz 和桌面 ZIP 安装方式继续支持。
+仓库保留为私有，安装环境必须具有该仓库的 GitHub 读取权限。直接填写仓库链接，无需分支后缀或 Codex；仓库默认 release 分支：其中包含预构建页面及运行依赖，不执行 prepare / prepack 或依赖安装脚本，也不需要放宽 allowBuilds。main 是开发源码，不作为严格宿主环境的直接安装入口。离线 tgz 和桌面 ZIP 安装方式继续支持。
 
-开发后提交源码前请运行 npm run build，并将 dist 与源码一并提交。Git 安装冷缓存验收：npm run test:git-install -- --pnpm-cli <DSH内置pnpm.mjs路径>。该脚本默认测试 GitHub 安装分支，也可通过 --source 指定本地打包分支的 Git URL。
+开发后提交源码前请运行 npm run build，并将 dist 与源码一并提交。Git 安装冷缓存验收：npm run test:git-install -- --pnpm-cli <DSH内置pnpm.mjs路径>。该脚本默认测试无分支后缀的 GitHub 仓库链接，也可通过 --source 指定本地打包分支的 Git URL。

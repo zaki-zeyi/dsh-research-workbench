@@ -7,7 +7,7 @@ const arg = name => { const i = process.argv.indexOf(name); return i < 0 ? undef
 const output = arg('--output');
 if (!output || existsSync(output)) throw new Error('请用 --output 指定新的临时发布目录');
 const directory = resolve(output), release = JSON.parse(readFileSync(resolve(root, 'artifacts/plugin-release.json')));
-const branch = 'codex/install';
+const branch = 'release';
 function git(args, cwd = directory, allowFailure = false) {
  const r = spawnSync('git', args, { cwd, timeout: 120000, encoding: 'utf8', maxBuffer: 4 * 1024 * 1024 });
  if (!allowFailure && (r.error || r.status !== 0)) throw r.error ?? new Error(`git ${args[0]} 失败：${r.stderr}`);
@@ -23,6 +23,7 @@ if (process.argv.includes('--push')) {
 }
 for (const name of readdirSync(directory)) if (name !== '.git') rmSync(resolve(directory, name), { recursive: true, force: true });
 cpSync(resolve(root, 'artifacts', release.directory), directory, { recursive: true });
+cpSync(resolve(root, 'README.md'), resolve(directory, 'README.md'));
 const manifest = JSON.parse(readFileSync(resolve(directory, 'package.json')));
 if (manifest.name !== 'dsh-research-workbench' || manifest.scripts) throw new Error('安装分支必须使用无生命周期脚本的正式发布包');
 git(['add', '--force', '--all']);
