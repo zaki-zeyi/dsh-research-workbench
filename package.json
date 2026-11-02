@@ -1,6 +1,6 @@
 {
   "name": "dsh-research-workbench",
-  "version": "0.18.2",
+  "version": "0.18.3",
   "description": "调研工作台：适用于 DeepSeek Harness 桌面版和网页版的 宿主原生会话调研插件",
   "type": "module",
   "main": "./plugin/index.mjs",
@@ -47,6 +47,7 @@
     "server",
     "dist",
     "scripts",
+    "docs",
     "README.md"
   ]
 }
