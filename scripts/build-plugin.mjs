@@ -17,7 +17,8 @@ process.stdout.write(run(['run', 'build']));
 const stage = resolve(root, 'artifacts/package-stage');
 rmSync(stage, { recursive: true, force: true }); mkdirSync(stage, { recursive: true });
 try {
-  for (const path of ['server', 'plugin', 'dist', 'docs', 'scripts/prepare-pty.mjs', 'scripts/terminal-turn-notify.mjs']) cpSync(resolve(root, path), resolve(stage, path), { recursive: true });
+  for (const path of ['server', 'plugin', 'dist', 'scripts/prepare-pty.mjs', 'scripts/terminal-turn-notify.mjs']) cpSync(resolve(root, path), resolve(stage, path), { recursive: true });
+  cpSync(resolve(root, 'docs'), resolve(stage, 'docs'), { recursive: true, filter: path => !path.includes('/screenshots') });
   cpSync(resolve(root, 'docs/plugin-install.md'), resolve(stage, 'README.md'));
   const source = JSON.parse(readFileSync(resolve(root, 'package.json')));
   const dependencies = Object.fromEntries(['express', 'ws', 'zod', 'node-pty', '@larksuiteoapi/node-sdk'].map(name => [name, source.dependencies[name]]));
