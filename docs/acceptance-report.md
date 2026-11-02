@@ -1,3 +1,7 @@
+# 0.18.2 GitHub 安装入口
+
+新增 codex/install 自包含安装分支，避免 Git 准备及依赖构建脚本限制。115 项 Node 用例、空 store 下 DSH 内置 pnpm 11 Git 冷安装、Node/Electron 运行与离线包验收通过。参见 [修复说明](fix-2026-11-02-github-install.md)。
+
 # 0.18.1 中文显示名
 
 界面页签和主页显示「调研工作台」，项目和插件包名保留 dsh-research-workbench。113 项 Node、26 项浏览器、真实宿主及离线包验收通过。

@@ -1,6 +1,8 @@
 # dsh-research-workbench
 
-项目与插件包名：`dsh-research-workbench`，界面名称：「调研工作台」。源码：[GitHub](https://github.com/zaki-zeyi/dsh-research-workbench)。
+项目与插件包名：`dsh-research-workbench`，界面名称：「调研工作台」。
+
+DSH 添加插件请使用安装分支链接：`https://github.com/zaki-zeyi/dsh-research-workbench#codex/install`。`main` 为开发源码；安装分支携带预构建页面和运行依赖，避免触发宿主构建脚本限制。源码：[GitHub](https://github.com/zaki-zeyi/dsh-research-workbench)。
 
 根据 [飞书 PRD](https://zcnnosk3k1j9.feishu.cn/wiki/Twspww4ZKiUQI8krBGlc2VCsnmr) 实现的本地单用户 DSH 插件。以调研任务与报告为入口，复用宿主原生会话执行调研、追问与飞书保存。
 

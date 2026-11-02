@@ -3,14 +3,14 @@ import { spawnSync } from 'node:child_process';
 import { mkdtempSync, readFileSync, writeFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { fileURLToPath, pathToFileURL } from 'node:url';
+import { fileURLToPath } from 'node:url';
 const root = fileURLToPath(new URL('..', import.meta.url));
 const option = name => { const i = process.argv.indexOf(name); return i < 0 ? undefined : process.argv[i + 1]; };
 const pnpm = option('--pnpm-cli') ?? process.env.DSH_PNPM_CLI;
 if (!pnpm) throw new Error('请用 --pnpm-cli 指定 DSH 实际使用的 pnpm.mjs 路径');
 const revision = spawnSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' });
 if (revision.status !== 0) throw new Error('本地 Git 验收需要已提交的源码');
-const source = option('--source') ?? `git+${pathToFileURL(root).href}#${revision.stdout.trim()}`;
+const source = option('--source') ?? 'https://github.com/zaki-zeyi/dsh-research-workbench#codex/install';
 const directory = mkdtempSync(resolve(tmpdir(), 'dsh-research-git-install-'));
 function run(command, args, extra = {}) { const result = spawnSync(command, args, { cwd: directory, stdio: 'inherit', ...extra }); if (result.error || result.status !== 0) throw result.error ?? new Error(`Git安装验收失败：${result.status}`); }
 try {

@@ -21,7 +21,8 @@
     "test:native-host": "node scripts/native-host-acceptance.mjs --browser",
     "test:feishu-qr": "node scripts/feishu-registration-smoke.mjs",
     "plugin:check-pack": "node scripts/check-plugin-pack.mjs",
-    "test:git-install": "node scripts/git-install-acceptance.mjs"
+    "test:git-install": "node scripts/git-install-acceptance.mjs",
+    "plugin:publish-git": "node scripts/publish-git-plugin.mjs"
   },
   "dependencies": {
     "@larksuiteoapi/node-sdk": "1.76.0",
